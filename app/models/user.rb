@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   	p email
   	p password
   	@user = User.find_by_email(email)
-  	if @user.password == password
-  		return @user
-  	end
+    if @user != nil && @user.password == password
+      return @user
+    end
   end
 
 end

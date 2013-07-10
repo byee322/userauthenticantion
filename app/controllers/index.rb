@@ -2,7 +2,6 @@ get '/' do
 	@user = User.all
   # render home page
  #TODO: Show all users if user is signed in
-
   erb :index
 end
 
@@ -14,12 +13,11 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-	@user = User.authenticate(params[:email],params[:password])
-	p @user
-	if @user
+	if User.authenticate(params[:email],params[:password])
 		session[:user_id] = @user.id
 		redirect '/'
 	else
+		@error = 'Sorry you weren\'t found'
 		erb :sign_in
 	end
 end
